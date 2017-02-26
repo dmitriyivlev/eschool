@@ -1,0 +1,9 @@
+<!DOCTYPE suite SYSTEM "http://beust.com/testng/testng-1.0.dtd" >
+<suite name="Eschool test suite">
+    <test name="testing">
+        <classes>
+            <class name="ru.ddimike.eschool.validator.TestEmailValidator" />
+            <class name="ru.ddimike.eschool.validator.TestPhoneValidator" />
+        </classes>
+    </test>
+</suite>

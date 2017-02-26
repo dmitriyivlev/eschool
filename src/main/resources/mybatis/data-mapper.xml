@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding= "UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="data-mapper">
+
+    <resultMap id = "pupilMap" type = "ru.ddimike.eschool.model.Pupil">
+        <result property = "id" column = "id"/>
+        <result property = "firstName" column = "first_name"/>
+        <result property = "lastName" column = "last_name"/>
+        <result property = "middleName" column = "middle_name"/>
+        <result property = "birthday" column = "birthday"/>
+        <result property = "sex" column = "sex"/>
+        <result property = "classNumber" column = "class_number"/>
+        <result property = "classLetter" column = "class_letter"/>
+        <result property = "address" column = "address"/>
+        <result property = "homePhone" column = "home_phone"/>
+        <result property = "mobilePhone" column = "mobile_phone"/>
+        <result property = "email" column = "email"/>
+
+    </resultMap>
+
+    <select id="selectAllPupil" resultMap = "pupilMap">
+        select * from pupil order by id asc
+    </select>
+
+    <insert id="insertPupil">
+        insert into pupil
+        (first_name, last_name, middle_name, birthday, sex, class_number, class_letter, address, home_phone, mobile_phone, email)
+        values
+        (#{firstName}, #{lastName}, #{middleName}, #{birthday}, #{sex}, #{classNumber}, #{classLetter}, #{address}, #{homePhone}, #{mobilePhone}, #{email})
+    </insert>
+
+    <delete id="deletePupil" parameterType="int">
+        delete from pupil where id = #{id}
+    </delete>
+</mapper>
