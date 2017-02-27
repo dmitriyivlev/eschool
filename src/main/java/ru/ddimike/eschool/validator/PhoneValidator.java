@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-@Component("phoneValidator")
+@Component
 public class PhoneValidator {
 
     private Pattern pattern;

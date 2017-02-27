@@ -1,6 +1,5 @@
 package ru.ddimike.eschool.controller;
 
-import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
@@ -10,6 +9,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import ru.ddimike.eschool.model.Pupil;
+import ru.ddimike.eschool.service.PupilService;
 import ru.ddimike.eschool.validator.PupilFormValidator;
 import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
@@ -21,7 +21,7 @@ import java.util.List;
 public class PupilController {
 
     @Autowired
-    private SqlSession m_SqlSession;
+    PupilService pupilService;
 
     @Autowired
     PupilFormValidator pupilFormValidator;
@@ -35,15 +35,12 @@ public class PupilController {
         webDataBinder.setValidator(pupilFormValidator);
     }
 
-
-
-
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public String list(Model p_Model, HttpSession httpSession) {
+    public String list(Model model, HttpSession httpSession) {
         if("true".equals(httpSession.getAttribute("isLoginCorrect"))){
 
-            List<Pupil> pupilsAllList = m_SqlSession.selectList("data-mapper.selectAllPupil");
-            p_Model.addAttribute("pupilsData", pupilsAllList);
+            List<Pupil> pupilsAllList = pupilService.findAll();
+            model.addAttribute("pupilsData", pupilsAllList);
             return "list";
         }
         else {
@@ -52,11 +49,11 @@ public class PupilController {
     }
 
     @RequestMapping(value = "/form", method = RequestMethod.GET)
-    public String form(Model p_Model, HttpSession httpSession) {
+    public String form(Model model, HttpSession httpSession) {
         if("true".equals(httpSession.getAttribute("isLoginCorrect"))) {
             Pupil newPupil = new Pupil();
-            p_Model.addAttribute("newPupilData", newPupil);
-            populateDefaultModel(p_Model);
+            model.addAttribute("newPupilData", newPupil);
+            populateDefaultModel(model);
             return "form";
         }
         else {
@@ -66,14 +63,14 @@ public class PupilController {
 
     @RequestMapping(value = "/add", method=RequestMethod.POST)
     public String add(@ModelAttribute("newPupilData") @Validated Pupil newPupil, BindingResult result,
-                      Model p_Model, HttpSession httpSession) {
+                      Model model, HttpSession httpSession) {
 
         if("true".equals(httpSession.getAttribute("isLoginCorrect"))) {
             if (result.hasErrors()) {
-                populateDefaultModel(p_Model);
+                populateDefaultModel(model);
                 return "form";
             } else {
-                m_SqlSession.insert("data-mapper.insertPupil", newPupil);
+                pupilService.add(newPupil);
 
                 return "redirect:/list";
             }
@@ -86,13 +83,13 @@ public class PupilController {
 
     @RequestMapping(value = "/delete/{pupilId}")
     public String delete(@PathVariable("pupilId") Integer pupilId) {
-        m_SqlSession.delete("data-mapper.deletePupil", pupilId);
+        pupilService.delete(pupilId);
 
         return "redirect:/list";
     }
 
     private void populateDefaultModel(Model model) {
-        List<Integer> classNumbers = new ArrayList<Integer>();
+        List<Integer> classNumbers = new ArrayList<>();
         classNumbers.add(1);
         classNumbers.add(2);
         classNumbers.add(3);
@@ -106,12 +103,13 @@ public class PupilController {
         classNumbers.add(11);
         model.addAttribute("classNumbers", classNumbers);
 
-        List<String> classLetters = new ArrayList<String>();
+        List<String> classLetters = new ArrayList<>();
         classLetters.add("А");
         classLetters.add("Б");
         classLetters.add("В");
         classLetters.add("Г");
         model.addAttribute("classLetters", classLetters);
+
     }
 
 }

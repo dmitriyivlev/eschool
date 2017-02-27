@@ -13,23 +13,23 @@ import javax.servlet.http.HttpSession;
 public class UserLoginController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String login(Model p_Model) {
+    public String login(Model model) {
         UserLogin userLogin = new UserLogin();
-        p_Model.addAttribute("userLoginData", userLogin);
+        model.addAttribute("userLoginData", userLogin);
         return "login";
     }
 
     @RequestMapping(value = "/", method = RequestMethod.POST)
-    public String checkLogin(@ModelAttribute("SpringWeb") UserLogin p_userLogin, Model p_Model, HttpSession httpSession) {
+    public String checkLogin(@ModelAttribute("userLoginData") UserLogin userLogin, Model model, HttpSession httpSession) {
 
         String nextView;
-        if("admin".equals(p_userLogin.getLogin()) && "admin".equals(p_userLogin.getPassword())) {
+        if("admin".equals(userLogin.getLogin()) && "admin".equals(userLogin.getPassword())) {
             httpSession.setAttribute("isLoginCorrect", "true");
             nextView = "redirect:/list";
         }
         else {
-            p_Model.addAttribute("userLoginData", p_userLogin);
-            p_Model.addAttribute("errorLoginMessage", "Неверные логин и пароль!!!");
+            model.addAttribute("userLoginData", userLogin);
+            model.addAttribute("errorLoginMessage", "Неверные логин и пароль!!!");
             nextView = "login";
         }
 

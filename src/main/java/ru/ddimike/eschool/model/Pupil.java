@@ -5,9 +5,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
-/**
- * Created by Дмитрий on 22.02.2017.
- */
 public class Pupil {
 
     private Integer id;

@@ -38,7 +38,7 @@
                 <div class="col-sm-4">
                     <form:input path="lastName" type="text" class="form-control"
                                 id="lastName" placeholder="Фамилия" />
-                        <form:errors path="lastName" class="control-label" />
+                    <form:errors path="lastName" class="control-label" />
                 </div>
             </div>
         </spring:bind>
@@ -49,7 +49,7 @@
                 <div class="col-sm-4">
                     <form:input path="middleName" type="text" class="form-control"
                                 id="middleName" placeholder="Отчество" />
-                        <form:errors path="middleName" class="control-label" />
+                    <form:errors path="middleName" class="control-label" />
                 </div>
             </div>
         </spring:bind>
@@ -59,7 +59,7 @@
                 <label class="col-sm-2 control-label">Дата рождения</label>
                 <div class="col-sm-4">
                     <form:input path="birthday" type="date" class="form-control" id="birthday" placeholder="Дата рождения" />
-                        <form:errors path="birthday" class="control-label" />
+                    <form:errors path="birthday" class="control-label" />
                 </div>
             </div>
         </spring:bind>
@@ -92,7 +92,7 @@
                     <form:select path="classLetter" class="form-control">
                         <form:options items="${classLetters}" />
                     </form:select>
-                        <form:errors path="classLetter" class="control-label" />
+                    <form:errors path="classLetter" class="control-label" />
                 </div>
                 <div class="col-sm-5"></div>
             </div>
@@ -104,7 +104,7 @@
                 <div class="col-sm-4">
                     <form:input path="address" type="text" class="form-control"
                                 id="address" placeholder="Адрес" />
-                        <form:errors path="address" class="control-label" />
+                    <form:errors path="address" class="control-label" />
                 </div>
             </div>
         </spring:bind>
@@ -115,7 +115,7 @@
                 <div class="col-sm-4">
                     <form:input path="homePhone" type="text" class="form-control"
                                 id="homePhone" placeholder="Домашний телефон: 8(XXX)XXX-XX-XX" />
-                        <form:errors path="homePhone" class="control-label" />
+                    <form:errors path="homePhone" class="control-label" />
                 </div>
             </div>
         </spring:bind>
@@ -126,7 +126,7 @@
                 <div class="col-sm-4">
                     <form:input path="mobilePhone" type="text" class="form-control"
                                 id="mobilePhone" placeholder="Мобильный телефон: 8(XXX)XXX-XX-XX" />
-                        <form:errors path="mobilePhone" class="control-label" />
+                    <form:errors path="mobilePhone" class="control-label" />
                 </div>
             </div>
         </spring:bind>
@@ -137,12 +137,17 @@
                 <div class="col-sm-4">
                     <form:input path="email" type="text" class="form-control"
                                 id="email" placeholder="Email" />
-                        <form:errors path="email" class="control-label" />
+                    <form:errors path="email" class="control-label" />
                 </div>
             </div>
         </spring:bind>
 
-        <button type="submit" class="btn btn-primary">Добавить</button>
+        <div class="form-group">
+            <label class="col-sm-2 control-label"></label>
+            <div class="col-sm-4">
+                <button type="submit" class="btn btn-primary">Добавить</button>
+            </div>
+        </div>
 
 
 

@@ -16,11 +16,9 @@ import java.util.Date;
 public class PupilFormValidator implements Validator {
 
     @Autowired
-    @Qualifier("phoneValidator")
     PhoneValidator phoneValidator;
 
     @Autowired
-    @Qualifier("emailValidator")
     EmailValidator emailValidator;
 
     @Autowired

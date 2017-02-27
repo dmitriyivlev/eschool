@@ -7,24 +7,24 @@ import ru.ddimike.eschool.model.Pupil;
 
 import java.util.List;
 
-@Service("pupilService")
+@Service
 public class PupilServiceImpl implements PupilService{
 
     @Autowired
-    private SqlSession m_SqlSession;
+    private SqlSession sqlSession;
 
     @Override
     public List<Pupil> findAll() {
-        return m_SqlSession.selectList("data-mapper.selectAllPupil");
+        return sqlSession.selectList("data-mapper.selectAllPupil");
     }
 
     @Override
     public void add(Pupil pupil) {
-        m_SqlSession.insert("data-mapper.insertPupil", pupil);
+        sqlSession.insert("data-mapper.insertPupil", pupil);
     }
 
     @Override
     public void delete(int id) {
-        m_SqlSession.delete("data-mapper.deletePupil", id);
+        sqlSession.delete("data-mapper.deletePupil", id);
     }
 }
