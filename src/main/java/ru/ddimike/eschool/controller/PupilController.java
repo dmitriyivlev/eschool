@@ -35,7 +35,7 @@ public class PupilController {
         webDataBinder.setValidator(pupilFormValidator);
     }
 
-    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    @GetMapping("/list")
     public String list(Model model, HttpSession httpSession) {
         if("true".equals(httpSession.getAttribute("isLoginCorrect"))){
 
@@ -48,27 +48,27 @@ public class PupilController {
         }
     }
 
-    @RequestMapping(value = "/form", method = RequestMethod.GET)
-    public String form(Model model, HttpSession httpSession) {
+    @GetMapping("/pupil")
+    public String createPupil(Model model, HttpSession httpSession) {
         if("true".equals(httpSession.getAttribute("isLoginCorrect"))) {
             Pupil newPupil = new Pupil();
             model.addAttribute("newPupilData", newPupil);
             populateDefaultModel(model);
-            return "form";
+            return "pupil";
         }
         else {
             return "redirect:/";
         }
     }
 
-    @RequestMapping(value = "/add", method=RequestMethod.POST)
+    @PostMapping("/pupil")
     public String add(@ModelAttribute("newPupilData") @Validated Pupil newPupil, BindingResult result,
                       Model model, HttpSession httpSession) {
 
         if("true".equals(httpSession.getAttribute("isLoginCorrect"))) {
             if (result.hasErrors()) {
                 populateDefaultModel(model);
-                return "form";
+                return "pupil";
             } else {
                 pupilService.add(newPupil);
 
@@ -81,7 +81,7 @@ public class PupilController {
 
     }
 
-    @RequestMapping(value = "/delete/{pupilId}")
+    @DeleteMapping("/list/{pupilId}/delete")
     public String delete(@PathVariable("pupilId") Integer pupilId) {
         pupilService.delete(pupilId);
 

@@ -2,9 +2,7 @@ package ru.ddimike.eschool.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import ru.ddimike.eschool.model.UserLogin;
 
 import javax.servlet.http.HttpSession;
@@ -12,14 +10,14 @@ import javax.servlet.http.HttpSession;
 @Controller
 public class UserLoginController {
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @GetMapping("/")
     public String login(Model model) {
         UserLogin userLogin = new UserLogin();
         model.addAttribute("userLoginData", userLogin);
         return "login";
     }
 
-    @RequestMapping(value = "/", method = RequestMethod.POST)
+    @PostMapping("/")
     public String checkLogin(@ModelAttribute("userLoginData") UserLogin userLogin, Model model, HttpSession httpSession) {
 
         String nextView;

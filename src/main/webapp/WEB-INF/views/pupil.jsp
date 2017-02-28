@@ -17,7 +17,7 @@
 
 <div class="container">
     <form:form class="form-horizontal" method="post"
-               action="${pageContext.request.contextPath}/add" modelAttribute="newPupilData" >
+               action="${pageContext.request.contextPath}/pupil" modelAttribute="newPupilData" >
 
         <form:hidden path="id" />
 
@@ -148,8 +148,6 @@
                 <button type="submit" class="btn btn-primary">Добавить</button>
             </div>
         </div>
-
-
 
     </form:form>
 </div>

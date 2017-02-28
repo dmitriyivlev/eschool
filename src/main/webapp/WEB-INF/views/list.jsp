@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
 <!DOCTYPE html>
 <html>
@@ -15,7 +16,7 @@
 
     <div class="container">
         <h1>Список учеников:</h1>
-        <button class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath}/form'">Добавить</button>
+        <button class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath}/pupil'">Добавить</button>
         <br/><br/>
         <table class="table table-striped">
             <tr><th width="20%">Фамилия Имя Отчество</th><th>Класс</th><th>Дата рождения</th><th width="20%">Адрес</th>
@@ -35,8 +36,7 @@
                             <td>${pupilData.mobilePhone}</td>
                             <td>${pupilData.email}</td>
                             <td>
-                                <button class="btn btn-danger" onclick="location.href='${pageContext.request.contextPath}/delete/${pupilData.id}'">Удалить</button>
-                                <%--<a class="btn btn-danger" href="${pageContext.request.contextPath}/delete/${pupilData.id}" role="button">Удалить</a>--%>
+                                <form:form method="delete" action="${pageContext.request.contextPath}/list/${pupilData.id}/delete"><button class="btn btn-danger" type="submit">Удалить</button></form:form>
                             </td>
                         </tr>
                     </c:forEach>
